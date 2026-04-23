@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI 风格展示库 | Design Trends Collection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        /* ===== Header ===== */
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.8) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* ===== Bento Grid Layout ===== */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .bento-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            padding: 32px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .card-desc {
+            font-size: 15px;
+            opacity: 0.9;
+            margin-bottom: 24px;
+        }
+
+        /* ===== Glass Morphism Section ===== */
+        .glass-demo {
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 20px;
+            padding: 24px;
+            margin-top: 20px;
+        }
+
+        .glass-button {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .glass-button:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.05);
+        }
+
+        /* ===== Neumorphism Section ===== */
+        .neu-container {
+            background: #e0e5ec;
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 20px;
+        }
+
+        .neu-button {
+            background: #e0e5ec;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 16px;
+            color: #6b7280;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 
+                8px 8px 16px #a3b1c6,
+                -8px -8px 16px #ffffff;
+            transition: all 0.2s ease;
+            margin: 8px;
+        }
+
+        .neu-button:hover {
+            box-shadow: 
+                4px 4px 8px #a3b1c6,
+                -4px -4px 8px #ffffff;
+        }
+
+        .neu-button:active {
+            box-shadow: 
+                inset 4px 4px 8px #a3b1c6,
+                inset -4px -4px 8px #ffffff;
+        }
+
+        /* ===== Aurora Background ===== */
+        .aurora-demo {
+            height: 200px;
+            border-radius: 20px;
+            margin-top: 20px;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(120, 119, 198, 0.8) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(255, 119, 198, 0.6) 0%, transparent 50%),
+                radial-gradient(ellipse at 40% 60%, rgba(100, 200, 255, 0.5) 0%, transparent 40%),
+                linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-size: 200% 200%;
+            animation: aurora 15s ease infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        @keyframes aurora {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* ===== Micro-interactions ===== */
+        .micro-container {
+            display: flex;
+            gap: 16px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .micro-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .micro-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .micro-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .micro-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .micro-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            h1 { font-size: 32px; }
+            .bento-grid { grid-template-columns: 1fr; }
+            .neu-container { padding: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 UI 风格展示库</h1>
+            <p class="subtitle">探索前沿设计趋势，激发创意灵感</p>
+        </header>
+
+        <div class="bento-grid">
+            <!-- Glass Morphism -->
+            <div class="bento-card">
+                <div class="card-icon">🫗</div>
+                <h2 class="card-title">Glass Morphism</h2>
+                <p class="card-desc">玻璃质感设计，半透明背景配合模糊效果，营造层次感和现代感。</p>
+                <div class="glass-demo">
+                    <p style="margin-bottom: 16px; opacity: 0.9;">透明模糊背景 + 边框光效</p>
+                    <button class="glass-button">Glass Button</button>
+                </div>
+            </div>
+
+            <!-- Neumorphism -->
+            <div class="bento-card">
+                <div class="card-icon">🧈</div>
+                <h2 class="card-title">Neumorphism</h2>
+                <p class="card-desc">新拟态设计，柔和的阴影创造凹凸感，如同从界面中雕刻而出。</p>
+                <div class="neu-container">
+                    <button class="neu-button">Soft UI</button>
+                    <button class="neu-button">Pressed</button>
+                </div>
+            </div>
+
+            <!-- Aurora Background -->
+            <div class="bento-card">
+                <div class="card-icon">🌌</div>
+                <h2 class="card-title">Aurora Background</h2>
+                <p class="card-desc">极光渐变背景，流动的色彩网格，营造梦幻般的视觉体验。</p>
+                <div class="aurora-demo">
+                    Flowing Gradients
+                </div>
+            </div>
+
+            <!-- Bento Grid -->
+            <div class="bento-card">
+                <div class="card-icon">🍱</div>
+                <h2 class="card-title">Bento Grid</h2>
+                <p class="card-desc">便当盒布局，模块化的卡片系统，灵活适应不同内容和屏幕尺寸。</p>
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 8px; margin-top: 20px;">
+                    <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 12px; text-align: center;">Large</div>
+                    <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 12px; text-align: center;">Small</div>
+                    <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 12px; text-align: center;">Small</div>
+                    <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 12px; text-align: center;">Small</div>
+                </div>
+            </div>
+
+            <!-- Micro-interactions -->
+            <div class="bento-card" style="grid-column: span 2;">
+                <div class="card-icon">✨</div>
+                <h2 class="card-title">Micro-interactions</h2>
+                <p class="card-desc">微交互设计，细腻的悬停、点击反馈动画，提升用户体验和界面活力。</p>
+                <div class="micro-container">
+                    <button class="micro-btn">Hover Me</button>
+                    <button class="micro-btn">Click Me</button>
+                    <button class="micro-btn">Scale</button>
+                    <button class="micro-btn">Ripple</button>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>🛠️ 由 WorkBuddy 生成 | 持续学习，不断进步</p>
+            <p style="margin-top: 8px; opacity: 0.7;">记录于 2026.4.23</p>
+        </footer>
+    </div>
+</body>
+</html>
