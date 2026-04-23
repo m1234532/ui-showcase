@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glass Morphism - UI 风格展示库</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .nav-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 40px 80px;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50px;
+            font-size: 14px;
+            margin-bottom: 24px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            font-size: 72px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 22px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        /* Demo Cards Grid */
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1200px;
+            width: 100%;
+            margin-top: 60px;
+        }
+
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 24px;
+            padding: 32px;
+            transition: all 0.4s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.1));
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .glass-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .glass-card p {
+            font-size: 15px;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .glass-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        /* Glass Button Variations */
+        .section {
+            padding: 100px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .section-desc {
+            font-size: 18px;
+            opacity: 0.8;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .button-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+
+        .glass-btn {
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .glass-btn.primary {
+            background: rgba(255,255,255,0.25);
+            color: #fff;
+        }
+
+        .glass-btn.secondary {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+        }
+
+        .glass-btn.outline {
+            background: transparent;
+            color: #fff;
+            border: 2px solid rgba(255,255,255,0.5);
+        }
+
+        .glass-btn.ghost {
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .glass-btn:hover {
+            transform: translateY(-2px);
+            background: rgba(255,255,255,0.35);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Glass Cards with Images */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .glass-image-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .glass-image-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        .card-image {
+            height: 160px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+        }
+
+        .card-content {
+            padding: 24px;
+        }
+
+        .card-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        .card-content h4 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .card-content p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* Glass Forms */
+        .form-section {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 24px;
+            padding: 48px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+
+        .glass-input {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .glass-input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .glass-input:focus {
+            outline: none;
+            background: rgba(255,255,255,0.15);
+            border-color: rgba(255,255,255,0.4);
+        }
+
+        .glass-submit {
+            width: 100%;
+            padding: 16px;
+            background: rgba(255,255,255,0.25);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .glass-submit:hover {
+            background: rgba(255,255,255,0.35);
+            transform: translateY(-2px);
+        }
+
+        /* Code Snippet */
+        .code-section {
+            background: rgba(0,0,0,0.3);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 60px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+
+        .code-section .comment { color: #6a9955; }
+        .code-section .property { color: #9cdcfe; }
+        .code-section .value { color: #ce9178; }
+        .code-section .selector { color: #d7ba7d; }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .demo-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 48px; }
+            .section { padding: 60px 24px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="index.html">← 返回首页</a>
+        <span class="nav-title">🫗 Glass Morphism</span>
+        <a href="neu.html">下一页 →</a>
+    </nav>
+
+    <section class="hero">
+        <span class="hero-badge">玻璃质感设计</span>
+        <h1>Glass Morphism</h1>
+        <p>半透明背景配合 backdrop-filter 模糊效果，营造现代感与层次感的界面设计语言</p>
+        
+        <div class="demo-grid">
+            <div class="glass-card">
+                <div class="glass-icon">🎨</div>
+                <h3>视觉层次</h3>
+                <p>通过透明度和模糊效果创造景深，让界面元素有玻璃般的通透感</p>
+            </div>
+            <div class="glass-card">
+                <div class="glass-icon">✨</div>
+                <h3>现代美学</h3>
+                <p>适合深色背景，配合渐变色彩，打造高级感的视觉效果</p>
+            </div>
+            <div class="glass-card">
+                <div class="glass-icon">🎯</div>
+                <h3>应用场景</h3>
+                <p>导航栏、卡片、弹窗、侧边栏、浮动操作按钮等元素</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">按钮变体</h2>
+        <p class="section-desc">多种玻璃质感的按钮样式，适应不同的交互层级</p>
+        
+        <div class="button-showcase">
+            <button class="glass-btn primary">Primary Button</button>
+            <button class="glass-btn secondary">Secondary</button>
+            <button class="glass-btn outline">Outline Style</button>
+            <button class="glass-btn ghost">Ghost Button</button>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">卡片组合</h2>
+        <p class="section-desc">玻璃质感的卡片系统，可以展示图片、标签和文字内容</p>
+        
+        <div class="card-grid">
+            <div class="glass-image-card">
+                <div class="card-image">🌅</div>
+                <div class="card-content">
+                    <span class="card-tag">自然</span>
+                    <h4>日出时分</h4>
+                    <p>玻璃卡片可以优雅地展示图文内容</p>
+                </div>
+            </div>
+            <div class="glass-image-card">
+                <div class="card-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">🏙️</div>
+                <div class="card-content">
+                    <span class="card-tag">城市</span>
+                    <h4>都市夜景</h4>
+                    <p>悬停时卡片会有微妙的缩放和阴影效果</p>
+                </div>
+            </div>
+            <div class="glass-image-card">
+                <div class="card-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">🌊</div>
+                <div class="card-content">
+                    <span class="card-tag">海洋</span>
+                    <h4>蓝色海洋</h4>
+                    <p>玻璃质感让背景色彩若隐若现</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">表单元素</h2>
+        <p class="section-desc">玻璃质感的输入框和表单，营造统一的视觉体验</p>
+        
+        <div class="form-section">
+            <div class="form-group">
+                <label>用户名</label>
+                <input type="text" class="glass-input" placeholder="请输入用户名">
+            </div>
+            <div class="form-group">
+                <label>邮箱</label>
+                <input type="email" class="glass-input" placeholder="your@email.com">
+            </div>
+            <div class="form-group">
+                <label>留言</label>
+                <input type="text" class="glass-input" placeholder="想说点什么...">
+            </div>
+            <button class="glass-submit">提交</button>
+        </div>
+
+        <div class="code-section">
+<span class="selector">.glass-element</span> {<br>
+&nbsp;&nbsp;<span class="property">background</span>: <span class="value">linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05))</span>;<br>
+&nbsp;&nbsp;<span class="property">backdrop-filter</span>: <span class="value">blur(20px)</span>;<br>
+&nbsp;&nbsp;<span class="property">border</span>: <span class="value">1px solid rgba(255,255,255,0.3)</span>;<br>
+&nbsp;&nbsp;<span class="property">border-radius</span>: <span class="value">20px</span>;<br>
+}<br>
+<br>
+<span class="comment">/* 悬停效果 */</span><br>
+<span class="selector">.glass-element:hover</span> {<br>
+&nbsp;&nbsp;<span class="property">background</span>: <span class="value">rgba(255,255,255,0.3)</span>;<br>
+&nbsp;&nbsp;<span class="property">transform</span>: <span class="value">translateY(-4px)</span>;<br>
+&nbsp;&nbsp;<span class="property">box-shadow</span>: <span class="value">0 20px 40px rgba(0,0,0,0.2)</span>;<br>
+}
+        </div>
+    </section>
+</body>
+</html>

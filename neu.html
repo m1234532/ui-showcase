@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neumorphism - UI 风格展示库</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #e0e5ec;
+            min-height: 100vh;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        /* Navigation - Glass style on neu background */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: #e0e5ec;
+            box-shadow: 
+                0 4px 8px #a3b1c6,
+                0 -4px 8px #ffffff;
+        }
+
+        .nav a {
+            color: #4a5568;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 12px 24px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 
+                6px 6px 12px #a3b1c6,
+                -6px -6px 12px #ffffff;
+        }
+
+        .nav a:hover {
+            box-shadow: 
+                inset 4px 4px 8px #a3b1c6,
+                inset -4px -4px 8px #ffffff;
+        }
+
+        .nav-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 140px 40px 100px;
+        }
+
+        .neu-badge {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-size: 14px;
+            margin-bottom: 32px;
+            box-shadow: 
+                6px 6px 12px #a3b1c6,
+                -6px -6px 12px #ffffff;
+            color: #4a5568;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #2d3748;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #718096;
+            max-width: 600px;
+            margin-bottom: 50px;
+        }
+
+        /* Neumorphic Circle */
+        .neu-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            margin: 0 auto;
+            box-shadow: 
+                20px 20px 60px #a3b1c6,
+                -20px -20px 60px #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .neu-circle:hover {
+            box-shadow: 
+                inset 20px 20px 60px #a3b1c6,
+                inset -20px -20px 60px #ffffff;
+        }
+
+        /* Demo Cards */
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 1000px;
+            width: 100%;
+            margin-top: 60px;
+        }
+
+        .neu-card {
+            padding: 40px 32px;
+            border-radius: 24px;
+            box-shadow: 
+                12px 12px 24px #a3b1c6,
+                -12px -12px 24px #ffffff;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .neu-card:hover {
+            box-shadow: 
+                8px 8px 16px #a3b1c6,
+                -8px -8px 16px #ffffff;
+        }
+
+        .neu-card .icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            margin: 0 auto 20px;
+            box-shadow: 
+                8px 8px 16px #a3b1c6,
+                -8px -8px 16px #ffffff;
+        }
+
+        .neu-card h3 {
+            font-size: 18px;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+
+        .neu-card p {
+            font-size: 14px;
+            color: #718096;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 100px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-alt {
+            background: linear-gradient(145deg, #d1d9e6, #f0f5fc);
+        }
+
+        .section-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .section-desc {
+            font-size: 18px;
+            color: #718096;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        /* Button Variations */
+        .button-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+
+        .neu-btn {
+            padding: 18px 36px;
+            border: none;
+            border-radius: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #4a5568;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .neu-btn.raised {
+            background: #e0e5ec;
+            box-shadow: 
+                8px 8px 16px #a3b1c6,
+                -8px -8px 16px #ffffff;
+        }
+
+        .neu-btn.raised:hover {
+            box-shadow: 
+                4px 4px 8px #a3b1c6,
+                -4px -4px 8px #ffffff;
+        }
+
+        .neu-btn.raised:active {
+            box-shadow: 
+                inset 4px 4px 8px #a3b1c6,
+                inset -4px -4px 8px #ffffff;
+        }
+
+        .neu-btn.pressed {
+            background: #e0e5ec;
+            box-shadow: 
+                inset 6px 6px 12px #a3b1c6,
+                inset -6px -6px 12px #ffffff;
+        }
+
+        .neu-btn.concave {
+            background: linear-gradient(145deg, #f0f5fc, #d1d9e6);
+            box-shadow: 
+                8px 8px 16px #a3b1c6,
+                -8px -8px 16px #ffffff;
+        }
+
+        .neu-btn.convex {
+            background: linear-gradient(145deg, #d1d9e6, #f0f5fc);
+            box-shadow: 
+                8px 8px 16px #a3b1c6,
+                -8px -8px 16px #ffffff;
+        }
+
+        /* Toggle Switch */
+        .toggle-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+
+        .neu-toggle {
+            position: relative;
+            width: 80px;
+            height: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                inset 4px 4px 8px #a3b1c6,
+                inset -4px -4px 8px #ffffff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .neu-toggle::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #e0e5ec;
+            box-shadow: 
+                4px 4px 8px #a3b1c6,
+                -4px -4px 8px #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .neu-toggle.active::after {
+            left: 44px;
+            background: linear-gradient(145deg, #667eea, #764ba2);
+            box-shadow: 
+                4px 4px 8px #a3b1c6,
+                -4px -4px 8px #ffffff;
+        }
+
+        .neu-toggle.round {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+
+        .neu-toggle.round::after {
+            display: none;
+        }
+
+        .neu-toggle.round.active {
+            box-shadow: 
+                inset 6px 6px 12px #a3b1c6,
+                inset -6px -6px 12px #ffffff;
+        }
+
+        /* Input Fields */
+        .input-showcase {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            max-width: 500px;
+            margin: 0 auto 60px;
+        }
+
+        .neu-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .neu-input-group label {
+            font-size: 14px;
+            color: #4a5568;
+            font-weight: 500;
+            padding-left: 8px;
+        }
+
+        .neu-input {
+            padding: 16px 20px;
+            border: none;
+            border-radius: 16px;
+            font-size: 15px;
+            font-family: inherit;
+            color: #4a5568;
+            background: #e0e5ec;
+            box-shadow: 
+                inset 6px 6px 12px #a3b1c6,
+                inset -6px -6px 12px #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .neu-input:focus {
+            outline: none;
+            box-shadow: 
+                inset 8px 8px 16px #a3b1c6,
+                inset -8px -8px 16px #ffffff;
+        }
+
+        .neu-input::placeholder {
+            color: #a0aec0;
+        }
+
+        /* Color Variations */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .color-card {
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .color-card.blue {
+            background: #e3f2fd;
+            box-shadow: 
+                10px 10px 20px #b1c1cd,
+                -10px -10px 20px #ffffff;
+        }
+
+        .color-card.pink {
+            background: #fce4ec;
+            box-shadow: 
+                10px 10px 20px #c9b0ba,
+                -10px -10px 20px #ffffff;
+        }
+
+        .color-card.green {
+            background: #e8f5e9;
+            box-shadow: 
+                10px 10px 20px #b6c0b7,
+                -10px -10px 20px #ffffff;
+        }
+
+        .color-card.purple {
+            background: #f3e5f5;
+            box-shadow: 
+                10px 10px 20px #c0b0c2,
+                -10px -10px 20px #ffffff;
+        }
+
+        .color-preview {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            margin: 0 auto 16px;
+            box-shadow: 
+                6px 6px 12px rgba(0,0,0,0.1),
+                -6px -6px 12px rgba(255,255,255,0.8);
+        }
+
+        .color-card.blue .color-preview { background: linear-gradient(145deg, #64b5f6, #1976d2); }
+        .color-card.pink .color-preview { background: linear-gradient(145deg, #f48fb1, #c2185b); }
+        .color-card.green .color-preview { background: linear-gradient(145deg, #81c784, #388e3c); }
+        .color-card.purple .color-preview { background: linear-gradient(145deg, #ba68c8, #7b1fa2); }
+
+        .color-card h4 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #2d3748;
+        }
+
+        .color-card p {
+            font-size: 14px;
+            color: #718096;
+        }
+
+        /* Code Section */
+        .code-section {
+            background: #d1d9e6;
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 60px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            line-height: 1.8;
+            box-shadow: 
+                inset 8px 8px 16px #a3b1c6,
+                inset -8px -8px 16px #ffffff;
+            overflow-x: auto;
+        }
+
+        .code-section .comment { color: #718096; }
+        .code-section .property { color: #4a5568; }
+        .code-section .value { color: #667eea; }
+        .code-section .selector { color: #2d3748; font-weight: 600; }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .demo-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 42px; }
+            .section { padding: 60px 24px; }
+            .nav { padding: 16px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="glass.html">← Glass</a>
+        <span class="nav-title">🧈 Neumorphism</span>
+        <a href="aurora.html">Aurora →</a>
+    </nav>
+
+    <section class="hero">
+        <span class="neu-badge">新拟态设计</span>
+        <h1>Neumorphism</h1>
+        <p>柔和的内外阴影创造凹凸感，如同从界面中雕刻而出的极简设计语言</p>
+        
+        <div class="neu-circle">
+            🧈
+        </div>
+
+        <div class="demo-grid">
+            <div class="neu-card">
+                <div class="icon">🎨</div>
+                <h3>光影层次</h3>
+                <p>通过双重阴影创造凸起和凹陷效果，无需边框即可表达层次</p>
+            </div>
+            <div class="neu-card">
+                <div class="icon">✨</div>
+                <h3>极简美学</h3>
+                <p>依靠光影而非颜色区分元素，打造纯净柔和的视觉效果</p>
+            </div>
+            <div class="neu-card">
+                <div class="icon">🎯</div>
+                <h3>应用场景</h3>
+                <p>设置面板、工具栏、仪表盘、按钮组等简洁界面</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-alt">
+        <h2 class="section-title">按钮状态</h2>
+        <p class="section-desc">凸起、按下、凹陷等多种按钮状态</p>
+        
+        <div class="button-showcase">
+            <button class="neu-btn raised">Raised</button>
+            <button class="neu-btn pressed">Pressed</button>
+            <button class="neu-btn concave">Concave</button>
+            <button class="neu-btn convex">Convex</button>
+        </div>
+
+        <div class="code-section">
+<span class="comment">/* 凸起效果 */</span><br>
+<span class="selector">.neu-raised</span> {<br>
+&nbsp;&nbsp;<span class="property">box-shadow</span>: <span class="value">8px 8px 16px #a3b1c6, -8px -8px 16px #ffffff</span>;<br>
+}<br>
+<br>
+<span class="comment">/* 按下效果 */</span><br>
+<span class="selector">.neu-pressed</span> {<br>
+&nbsp;&nbsp;<span class="property">box-shadow</span>: <span class="value">inset 6px 6px 12px #a3b1c6, inset -6px -6px 12px #ffffff</span>;<br>
+}<br>
+<br>
+<span class="comment">/* 悬停时切换状态 */</span><br>
+<span class="selector">.neu-btn:active</span> {<br>
+&nbsp;&nbsp;<span class="property">box-shadow</span>: <span class="value">inset 4px 4px 8px #a3b1c6, inset -4px -4px 8px #ffffff</span>;<br>
+}
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">开关组件</h2>
+        <p class="section-desc">新拟态风格的切换开关和圆形按钮</p>
+        
+        <div class="toggle-showcase">
+            <div class="neu-toggle" onclick="this.classList.toggle('active')"></div>
+            <div class="neu-toggle active" onclick="this.classList.toggle('active')"></div>
+            <div class="neu-toggle round" onclick="this.classList.toggle('active')">⚡</div>
+            <div class="neu-toggle round active" onclick="this.classList.toggle('active')">🔊</div>
+            <div class="neu-toggle round" onclick="this.classList.toggle('active')">🌙</div>
+        </div>
+    </section>
+
+    <section class="section section-alt">
+        <h2 class="section-title">输入框</h2>
+        <p class="section-desc">凹陷风格的表单输入框</p>
+        
+        <div class="input-showcase">
+            <div class="neu-input-group">
+                <label>用户名</label>
+                <input type="text" class="neu-input" placeholder="请输入用户名">
+            </div>
+            <div class="neu-input-group">
+                <label>邮箱</label>
+                <input type="email" class="neu-input" placeholder="your@email.com">
+            </div>
+            <div class="neu-input-group">
+                <label>密码</label>
+                <input type="password" class="neu-input" placeholder="••••••••">
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">色彩变体</h2>
+        <p class="section-desc">新拟态风格可以适配不同的主题色</p>
+        
+        <div class="color-grid">
+            <div class="color-card blue">
+                <div class="color-preview"></div>
+                <h4>蓝色主题</h4>
+                <p>适合科技、商务类产品</p>
+            </div>
+            <div class="color-card pink">
+                <div class="color-preview"></div>
+                <h4>粉色主题</h4>
+                <p>适合女性、生活方式产品</p>
+            </div>
+            <div class="color-card green">
+                <div class="color-preview"></div>
+                <h4>绿色主题</h4>
+                <p>适合健康、环保类产品</p>
+            </div>
+            <div class="color-card purple">
+                <div class="color-preview"></div>
+                <h4>紫色主题</h4>
+                <p>适合创意、艺术类应用</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

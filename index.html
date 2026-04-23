@@ -14,303 +14,252 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #fafafa;
             min-height: 100vh;
-            color: #fff;
+            color: #1a1a1a;
             line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 60px 24px;
         }
 
         /* ===== Header ===== */
         header {
             text-align: center;
-            margin-bottom: 80px;
+            padding: 80px 24px 60px;
+            background: linear-gradient(180deg, #fff 0%, #f5f5f5 100%);
+            border-bottom: 1px solid #e5e5e5;
         }
 
         h1 {
-            font-size: 48px;
+            font-size: 52px;
             font-weight: 700;
             margin-bottom: 16px;
-            background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.8) 100%);
+            background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            letter-spacing: -0.02em;
         }
 
         .subtitle {
-            font-size: 18px;
-            opacity: 0.9;
-            font-weight: 300;
+            font-size: 20px;
+            color: #666;
+            font-weight: 400;
         }
 
-        /* ===== Bento Grid Layout ===== */
-        .bento-grid {
+        /* ===== Navigation Cards ===== */
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 24px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             gap: 24px;
-            margin-bottom: 60px;
         }
 
-        .bento-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 24px;
-            padding: 32px;
-            transition: all 0.3s ease;
+        .nav-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 40px 32px;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid #e8e8e8;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
         }
 
-        .bento-card:hover {
-            transform: translateY(-4px);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        .nav-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent-color);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .nav-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            border-color: #ddd;
+        }
+
+        .nav-card:hover::before {
+            transform: scaleX(1);
         }
 
         .card-icon {
-            font-size: 48px;
-            margin-bottom: 16px;
+            font-size: 56px;
+            margin-bottom: 20px;
+            display: block;
         }
 
         .card-title {
             font-size: 24px;
             font-weight: 600;
             margin-bottom: 12px;
+            color: #1a1a1a;
         }
 
         .card-desc {
             font-size: 15px;
-            opacity: 0.9;
+            color: #666;
+            line-height: 1.7;
             margin-bottom: 24px;
         }
 
-        /* ===== Glass Morphism Section ===== */
-        .glass-demo {
-            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.3);
+        .card-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .feature-tag {
+            padding: 6px 12px;
+            background: #f5f5f5;
             border-radius: 20px;
-            padding: 24px;
-            margin-top: 20px;
+            font-size: 13px;
+            color: #555;
         }
 
-        .glass-button {
-            background: rgba(255,255,255,0.2);
-            border: 1px solid rgba(255,255,255,0.3);
-            color: #fff;
-            padding: 12px 24px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .glass-button:hover {
-            background: rgba(255,255,255,0.3);
-            transform: scale(1.05);
-        }
-
-        /* ===== Neumorphism Section ===== */
-        .neu-container {
-            background: #e0e5ec;
-            padding: 40px;
-            border-radius: 20px;
-            margin-top: 20px;
-        }
-
-        .neu-button {
-            background: #e0e5ec;
-            border: none;
-            padding: 16px 32px;
-            border-radius: 16px;
-            color: #6b7280;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 
-                8px 8px 16px #a3b1c6,
-                -8px -8px 16px #ffffff;
-            transition: all 0.2s ease;
-            margin: 8px;
-        }
-
-        .neu-button:hover {
-            box-shadow: 
-                4px 4px 8px #a3b1c6,
-                -4px -4px 8px #ffffff;
-        }
-
-        .neu-button:active {
-            box-shadow: 
-                inset 4px 4px 8px #a3b1c6,
-                inset -4px -4px 8px #ffffff;
-        }
-
-        /* ===== Aurora Background ===== */
-        .aurora-demo {
-            height: 200px;
-            border-radius: 20px;
-            margin-top: 20px;
-            background: 
-                radial-gradient(ellipse at 20% 20%, rgba(120, 119, 198, 0.8) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 80%, rgba(255, 119, 198, 0.6) 0%, transparent 50%),
-                radial-gradient(ellipse at 40% 60%, rgba(100, 200, 255, 0.5) 0%, transparent 40%),
-                linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            background-size: 200% 200%;
-            animation: aurora 15s ease infinite;
+        .card-arrow {
+            position: absolute;
+            bottom: 32px;
+            right: 32px;
+            width: 40px;
+            height: 40px;
+            background: #f5f5f5;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
-            font-weight: 600;
+            transition: all 0.3s ease;
         }
 
-        @keyframes aurora {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+        .nav-card:hover .card-arrow {
+            background: var(--accent-color);
+            transform: translateX(4px);
         }
 
-        /* ===== Micro-interactions ===== */
-        .micro-container {
-            display: flex;
-            gap: 16px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-
-        .micro-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            color: #fff;
-            padding: 14px 28px;
-            border-radius: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .micro-btn::before {
+        .nav-card:hover .card-arrow::after {
             content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255,255,255,0.3);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
+            width: 8px;
+            height: 8px;
+            border-top: 2px solid #fff;
+            border-right: 2px solid #fff;
+            transform: rotate(45deg);
         }
 
-        .micro-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        .card-arrow::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-top: 2px solid #666;
+            border-right: 2px solid #666;
+            transform: rotate(45deg);
+            transition: all 0.3s ease;
         }
 
-        .micro-btn:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        .micro-btn:active {
-            transform: scale(0.95);
-        }
+        /* Card-specific colors */
+        .nav-card.glass { --accent-color: #3b82f6; }
+        .nav-card.neu { --accent-color: #8b5cf6; }
+        .nav-card.aurora { --accent-color: #ec4899; }
+        .nav-card.bento { --accent-color: #10b981; }
+        .nav-card.micro { --accent-color: #f59e0b; }
 
         /* ===== Footer ===== */
         footer {
             text-align: center;
-            padding: 40px 0;
-            opacity: 0.8;
+            padding: 60px 24px;
+            color: #999;
             font-size: 14px;
+            border-top: 1px solid #e5e5e5;
         }
 
         /* ===== Responsive ===== */
         @media (max-width: 768px) {
-            h1 { font-size: 32px; }
-            .bento-grid { grid-template-columns: 1fr; }
-            .neu-container { padding: 24px; }
+            h1 { font-size: 36px; }
+            .subtitle { font-size: 16px; }
+            .nav-container { 
+                grid-template-columns: 1fr;
+                padding: 40px 16px;
+            }
+            .nav-card { padding: 32px 24px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🎨 UI 风格展示库</h1>
-            <p class="subtitle">探索前沿设计趋势，激发创意灵感</p>
-        </header>
+    <header>
+        <h1>🎨 UI 风格展示库</h1>
+        <p class="subtitle">探索前沿设计趋势，沉浸式体验每一种风格</p>
+    </header>
 
-        <div class="bento-grid">
-            <!-- Glass Morphism -->
-            <div class="bento-card">
-                <div class="card-icon">🫗</div>
-                <h2 class="card-title">Glass Morphism</h2>
-                <p class="card-desc">玻璃质感设计，半透明背景配合模糊效果，营造层次感和现代感。</p>
-                <div class="glass-demo">
-                    <p style="margin-bottom: 16px; opacity: 0.9;">透明模糊背景 + 边框光效</p>
-                    <button class="glass-button">Glass Button</button>
-                </div>
+    <div class="nav-container">
+        <a href="glass.html" class="nav-card glass">
+            <span class="card-icon">🫗</span>
+            <h2 class="card-title">Glass Morphism</h2>
+            <p class="card-desc">玻璃质感设计，半透明背景配合模糊效果，营造层次感和现代感。适用于卡片、弹窗、导航栏。</p>
+            <div class="card-features">
+                <span class="feature-tag">backdrop-filter</span>
+                <span class="feature-tag">透明度</span>
+                <span class="feature-tag">边框光效</span>
             </div>
+            <div class="card-arrow"></div>
+        </a>
 
-            <!-- Neumorphism -->
-            <div class="bento-card">
-                <div class="card-icon">🧈</div>
-                <h2 class="card-title">Neumorphism</h2>
-                <p class="card-desc">新拟态设计，柔和的阴影创造凹凸感，如同从界面中雕刻而出。</p>
-                <div class="neu-container">
-                    <button class="neu-button">Soft UI</button>
-                    <button class="neu-button">Pressed</button>
-                </div>
+        <a href="neu.html" class="nav-card neu">
+            <span class="card-icon">🧈</span>
+            <h2 class="card-title">Neumorphism</h2>
+            <p class="card-desc">新拟态设计，柔和的阴影创造凹凸感，如同从界面中雕刻而出。极简风格，依靠光影塑造形态。</p>
+            <div class="card-features">
+                <span class="feature-tag">box-shadow</span>
+                <span class="feature-tag">软UI</span>
+                <span class="feature-tag">立体感</span>
             </div>
+            <div class="card-arrow"></div>
+        </a>
 
-            <!-- Aurora Background -->
-            <div class="bento-card">
-                <div class="card-icon">🌌</div>
-                <h2 class="card-title">Aurora Background</h2>
-                <p class="card-desc">极光渐变背景，流动的色彩网格，营造梦幻般的视觉体验。</p>
-                <div class="aurora-demo">
-                    Flowing Gradients
-                </div>
+        <a href="aurora.html" class="nav-card aurora">
+            <span class="card-icon">🌌</span>
+            <h2 class="card-title">Aurora Background</h2>
+            <p class="card-desc">极光渐变背景，流动的色彩网格，营造梦幻般的视觉体验。适合作为页面背景或焦点区域。</p>
+            <div class="card-features">
+                <span class="feature-tag">渐变动画</span>
+                <span class="feature-tag">径向渐变</span>
+                <span class="feature-tag">流动感</span>
             </div>
+            <div class="card-arrow"></div>
+        </a>
 
-            <!-- Bento Grid -->
-            <div class="bento-card">
-                <div class="card-icon">🍱</div>
-                <h2 class="card-title">Bento Grid</h2>
-                <p class="card-desc">便当盒布局，模块化的卡片系统，灵活适应不同内容和屏幕尺寸。</p>
-                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 8px; margin-top: 20px;">
-                    <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 12px; text-align: center;">Large</div>
-                    <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 12px; text-align: center;">Small</div>
-                    <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 12px; text-align: center;">Small</div>
-                    <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 12px; text-align: center;">Small</div>
-                </div>
+        <a href="bento.html" class="nav-card bento">
+            <span class="card-icon">🍱</span>
+            <h2 class="card-title">Bento Grid</h2>
+            <p class="card-desc">便当盒布局，模块化的卡片系统，灵活适应不同内容和屏幕尺寸。适合仪表板、功能展示页。</p>
+            <div class="card-features">
+                <span class="feature-tag">网格布局</span>
+                <span class="feature-tag">模块化</span>
+                <span class="feature-tag">响应式</span>
             </div>
+            <div class="card-arrow"></div>
+        </a>
 
-            <!-- Micro-interactions -->
-            <div class="bento-card" style="grid-column: span 2;">
-                <div class="card-icon">✨</div>
-                <h2 class="card-title">Micro-interactions</h2>
-                <p class="card-desc">微交互设计，细腻的悬停、点击反馈动画，提升用户体验和界面活力。</p>
-                <div class="micro-container">
-                    <button class="micro-btn">Hover Me</button>
-                    <button class="micro-btn">Click Me</button>
-                    <button class="micro-btn">Scale</button>
-                    <button class="micro-btn">Ripple</button>
-                </div>
+        <a href="micro.html" class="nav-card micro">
+            <span class="card-icon">✨</span>
+            <h2 class="card-title">Micro-interactions</h2>
+            <p class="card-desc">微交互设计，细腻的悬停、点击反馈动画，提升用户体验和界面活力。让界面更有生命力。</p>
+            <div class="card-features">
+                <span class="feature-tag">悬停效果</span>
+                <span class="feature-tag">点击反馈</span>
+                <span class="feature-tag">动画过渡</span>
             </div>
-        </div>
-
-        <footer>
-            <p>🛠️ 由 WorkBuddy 生成 | 持续学习，不断进步</p>
-            <p style="margin-top: 8px; opacity: 0.7;">记录于 2026.4.23</p>
-        </footer>
+            <div class="card-arrow"></div>
+        </a>
     </div>
+
+    <footer>
+        <p>🛠️ 由 WorkBuddy 生成 | 持续学习，不断进步</p>
+        <p style="margin-top: 8px;">记录于 2026.4.23</p>
+    </footer>
 </body>
 </html>

@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Micro-interactions - UI 风格展示库</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0a;
+            min-height: 100vh;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(10,10,10,0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .nav a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .nav-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 40px 80px;
+            background: radial-gradient(ellipse at 50% 50%, rgba(102, 126, 234, 0.2) 0%, transparent 50%);
+        }
+
+        .micro-badge {
+            display: inline-block;
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50px;
+            font-size: 14px;
+            margin-bottom: 24px;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(102, 126, 234, 0.8); }
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #fff 0%, #a8a8a8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #888;
+            max-width: 600px;
+            margin-bottom: 50px;
+        }
+
+        /* Demo Grid */
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1000px;
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .micro-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .micro-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .micro-card .icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .micro-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .micro-card p {
+            font-size: 15px;
+            color: #888;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 100px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-alt {
+            background: #111;
+            max-width: 100%;
+        }
+
+        .section-title {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .section-desc {
+            font-size: 18px;
+            color: #888;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        /* Hover Effects */
+        .hover-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+
+        /* Button 1: Lift & Glow */
+        .btn-lift {
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Button 2: Scale & Ripple */
+        .btn-scale {
+            padding: 16px 32px;
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-scale:hover {
+            transform: scale(1.05);
+            border-color: #667eea;
+        }
+
+        .btn-scale:active {
+            transform: scale(0.95);
+        }
+
+        /* Button 3: Magnetic */
+        .btn-magnetic {
+            padding: 16px 32px;
+            background: transparent;
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            color: #667eea;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-magnetic:hover {
+            background: #667eea;
+            color: #fff;
+            box-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
+        }
+
+        /* Button 4: Underline Slide */
+        .btn-underline {
+            padding: 16px 32px;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .btn-underline::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .btn-underline:hover::after {
+            width: 100%;
+        }
+
+        /* Button 5: Fill Slide */
+        .btn-fill {
+            padding: 16px 32px;
+            background: transparent;
+            border: 2px solid #fff;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-fill::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn-fill:hover::before {
+            left: 0;
+        }
+
+        .btn-fill:hover {
+            border-color: transparent;
+        }
+
+        /* Cards with Interactions */
+        .card-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        /* Card 1: 3D Tilt */
+        .card-tilt {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 32px;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+
+        .card-tilt:hover {
+            transform: perspective(1000px) rotateX(5deg) rotateY(-5deg);
+            box-shadow: 20px 20px 60px rgba(0,0,0,0.5);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .card-tilt .card-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .card-tilt:hover .card-icon {
+            transform: translateZ(30px);
+        }
+
+        /* Card 2: Border Draw */
+        .card-border {
+            background: transparent;
+            border-radius: 20px;
+            padding: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.3;
+            transition: opacity 0.3s ease;
+        }
+
+        .card-border:hover::before {
+            opacity: 1;
+        }
+
+        .card-border:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        /* Card 3: Shine Effect */
+        .card-shine {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-shine::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 40%,
+                rgba(255,255,255,0.1) 50%,
+                transparent 60%
+            );
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .card-shine:hover::before {
+            transform: translateX(100%);
+        }
+
+        /* Loading Animations */
+        .loading-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 60px;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+
+        /* Spinner 1 */
+        .spinner-1 {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Spinner 2 */
+        .spinner-2 {
+            width: 50px;
+            height: 50px;
+            position: relative;
+        }
+
+        .spinner-2::before,
+        .spinner-2::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            animation: pulse-ring 1.5s ease-out infinite;
+        }
+
+        .spinner-2::before {
+            inset: 0;
+            border: 3px solid #667eea;
+        }
+
+        .spinner-2::after {
+            inset: 8px;
+            background: #667eea;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        /* Spinner 3 */
+        .spinner-3 {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .spinner-3 span {
+            width: 10px;
+            height: 10px;
+            background: #667eea;
+            border-radius: 50%;
+            animation: bounce 1.4s ease-in-out infinite both;
+        }
+
+        .spinner-3 span:nth-child(1) { animation-delay: -0.32s; }
+        .spinner-3 span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        /* Toggle Switches */
+        .toggle-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+
+        /* Toggle 1 */
+        .toggle-1 {
+            width: 60px;
+            height: 32px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .toggle-1.active {
+            background: #667eea;
+        }
+
+        .toggle-1::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 24px;
+            height: 24px;
+            background: #fff;
+            border-radius: 50%;
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        .toggle-1.active::after {
+            transform: translateX(28px);
+        }
+
+        /* Toggle 2 - Elastic */
+        .toggle-2 {
+            width: 60px;
+            height: 32px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .toggle-2.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .toggle-2::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 24px;
+            height: 24px;
+            background: #fff;
+            border-radius: 50%;
+            transition: transform 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+        }
+
+        .toggle-2.active::after {
+            transform: translateX(28px);
+        }
+
+        /* Heart Animation */
+        .heart-btn {
+            width: 60px;
+            height: 60px;
+            background: transparent;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .heart-btn:hover {
+            border-color: #e74c3c;
+        }
+
+        .heart-btn.active {
+            background: #e74c3c;
+            border-color: #e74c3c;
+            animation: heart-beat 0.3s ease;
+        }
+
+        @keyframes heart-beat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* Notification Badge */
+        .badge-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .bell-btn {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: 12px;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .bell-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 24px;
+            height: 24px;
+            background: #e74c3c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            animation: badge-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes badge-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Code Section */
+        .code-section {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 60px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+
+        .code-section .comment { color: #6a9955; }
+        .code-section .property { color: #9cdcfe; }
+        .code-section .value { color: #ce9178; }
+        .code-section .selector { color: #d7ba7d; }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .demo-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 42px; }
+            .section { padding: 60px 24px; }
+            .card-showcase { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="bento.html">← Bento Grid</a>
+        <span class="nav-title">✨ Micro-interactions</span>
+        <a href="index.html">首页 →</a>
+    </nav>
+
+    <section class="hero">
+        <span class="micro-badge">微交互动画</span>
+        <h1>Micro-interactions</h1>
+        <p>细腻的悬停、点击反馈动画，提升用户体验和界面活力，让界面更有生命力</p>
+        
+        <div class="demo-grid">
+            <div class="micro-card">
+                <div class="icon">🖱️</div>
+                <h3>悬停反馈</h3>
+                <p>按钮抬升、颜色变化、阴影扩散等视觉反馈</p>
+            </div>
+            <div class="micro-card">
+                <div class="icon">👆</div>
+                <h3>点击响应</h3>
+                <p>按下缩放、涟漪扩散、状态切换等交互</p>
+            </div>
+            <div class="micro-card">
+                <div class="icon">⏳</div>
+                <h3>加载状态</h3>
+                <p>旋转、跳动、脉动等动画缓解等待焦虑</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">按钮悬停效果</h2>
+        <p class="section-desc">不同的悬停交互方式，给用户清晰的反馈</p>
+        
+        <div class="hover-showcase">
+            <button class="btn-lift">Lift & Glow</button>
+            <button class="btn-scale">Scale & Ripple</button>
+            <button class="btn-magnetic">Magnetic</button>
+            <button class="btn-underline">Underline Slide</button>
+            <button class="btn-fill">Fill Slide</button>
+        </div>
+
+        <div class="code-section">
+<span class="comment">/* 抬升发光效果 */</span><br>
+<span class="selector">.btn-lift</span> {<br>
+&nbsp;&nbsp;<span class="property">transition</span>: <span class="value">all 0.3s cubic-bezier(0.4, 0, 0.2, 1)</span>;<br>
+}<br>
+<br>
+<span class="selector">.btn-lift:hover</span> {<br>
+&nbsp;&nbsp;<span class="property">transform</span>: <span class="value">translateY(-4px)</span>;<br>
+&nbsp;&nbsp;<span class="property">box-shadow</span>: <span class="value">0 20px 40px rgba(102, 126, 234, 0.4)</span>;<br>
+}<br>
+<br>
+<span class="comment">/* 填充滑入效果 */</span><br>
+<span class="selector">.btn-fill::before</span> {<br>
+&nbsp;&nbsp;<span class="property">content</span>: <span class="value">''</span>;<br>
+&nbsp;&nbsp;<span class="property">position</span>: <span class="value">absolute</span>;<br>
+&nbsp;&nbsp;<span class="property">left</span>: <span class="value">-100%</span>;<br>
+&nbsp;&nbsp;<span class="property">transition</span>: <span class="value">left 0.3s ease</span>;<br>
+}<br>
+<br>
+<span class="selector">.btn-fill:hover::before</span> {<br>
+&nbsp;&nbsp;<span class="property">left</span>: <span class="value">0</span>;<br>
+}
+        </div>
+    </section>
+
+    <section class="section section-alt">
+        <h2 class="section-title">卡片交互</h2>
+        <p class="section-desc">3D 倾斜、边框绘制、光泽扫过等卡片效果</p>
+        
+        <div class="card-showcase">
+            <div class="card-tilt">
+                <div class="card-icon">🎯</div>
+                <h3>3D 倾斜</h3>
+                <p>悬停时卡片产生 3D 倾斜效果，配合透视景深，让界面更有立体感</p>
+            </div>
+            <div class="card-border">
+                <div class="card-icon" style="font-size: 48px; margin-bottom: 16px;">🎨</div>
+                <h3>边框绘制</h3>
+                <p>使用渐变边框，悬停时边框高亮，吸引用户注意力</p>
+            </div>
+            <div class="card-shine">
+                <div class="card-icon" style="font-size: 48px; margin-bottom: 16px;">✨</div>
+                <h3>光泽扫过</h3>
+                <p>悬停时一道光泽从卡片上扫过，增添高级感和动态美</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">加载动画</h2>
+        <p class="section-desc">缓解用户等待焦虑的加载状态指示器</p>
+        
+        <div class="loading-showcase">
+            <div class="spinner-1"></div>
+            <div class="spinner-2"></div>
+            <div class="spinner-3">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-alt">
+        <h2 class="section-title">开关与反馈</h2>
+        <p class="section-desc">状态切换的动画效果和视觉反馈</p>
+        
+        <div class="toggle-showcase">
+            <div class="toggle-1" onclick="this.classList.toggle('active')"></div>
+            <div class="toggle-2 active" onclick="this.classList.toggle('active')"></div>
+            <button class="heart-btn" onclick="this.classList.toggle('active')">❤️</button>
+            <div class="badge-container">
+                <button class="bell-btn">🔔</button>
+                <span class="badge">3</span>
+            </div>
+        </div>
+
+        <div class="code-section">
+<span class="comment">/* 开关弹性动画 */</span><br>
+<span class="selector">.toggle::after</span> {<br>
+&nbsp;&nbsp;<span class="property">transition</span>: <span class="value">transform 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6)</span>;<br>
+}<br>
+<br>
+<span class="comment">/* 心跳动画 */</span><br>
+<span class="selector">@keyframes heart-beat</span> {<br>
+&nbsp;&nbsp;<span class="value">0% { transform: scale(1); }</span><br>
+&nbsp;&nbsp;<span class="value">50% { transform: scale(1.2); }</span><br>
+&nbsp;&nbsp;<span class="value">100% { transform: scale(1); }</span><br>
+}<br>
+<br>
+<span class="comment">/* 脉动红点 */</span><br>
+<span class="selector">@keyframes badge-pulse</span> {<br>
+&nbsp;&nbsp;<span class="value">0%, 100% { transform: scale(1); }</span><br>
+&nbsp;&nbsp;<span class="value">50% { transform: scale(1.1); }</span><br>
+}
+        </div>
+    </section>
+</body>
+</html>
